@@ -109,7 +109,7 @@ h4 {
     background-color: var(--clr-grey-10);
     padding-top: 5rem;
 }
-.hide loading {
+.hide-loading {
     display: none;
 }
 
