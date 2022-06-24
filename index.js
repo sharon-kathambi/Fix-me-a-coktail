@@ -1,21 +1,31 @@
-//const URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a";
+const URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s";
 
 document.addEventListener("DOMContentLoaded", ()=>{
-   showDrinks("https://www.thecocktaildb.com/api/json/v1/1/search.php?s") 
+   showDrinks("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a") 
 })
 
-async function showDrinks(url) {
-    /*const data = await*/ fetchDrinks();
-    //console.log(data)
+async function showDrinks(url, data = {}) {
+    const data2 = await fetchDrinks(url);
+    console.log(data2)
     //fetch drinks
     //display drinks
-   /*const section2 = await */displayDrinks();
-   // console.log(section2)
+   const section2 = await displayDrinks(data);
+    console.log(section2)
     };
 
+const form = document.querySelector(".search-form");
+const input = document.querySelector("#search[name ='drink']")
+    
+form.addEventListener("keyup", function (e) {
+     e.preventDefault();
+     const value = input.value;
+     if(!value) return;
+     showDrinks(`${URL}${value}`);
+    console.log(input.value);
+    });
 
 function fetchDrinks() {
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s")
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a")
     .then(response => response.json())
     .then(data => {
       // console.log(data)
@@ -23,18 +33,20 @@ function fetchDrinks() {
 })
     .catch(error => console.log("Fetch error:", error))
 }
-//fetchDrinks();
+//const display = fetchDrinks();
 
-const section = document.getElementsByClassName(".section-center");
-const title = document.getElementsByClassName(".title");
+//const section = document.getElementsByClassName(".section-center");
+//const title = document.getElementsByClassName(".title");
 
 
 //const {idDrink:id,strDrink:name,strDrinkThumb:image} = drink
-function displayDrinks(cocktail){
+function displayDrinks({drinks}){
+    const section = document.querySelector(".section-center");
+    const title = document.querySelector(".title");
     //return "Hello world";
-    console.log(cocktail.drinks)
-} 
-   /* if(!drinks){
+    console.log(drinks)
+
+    if(!drinks){
         //hide loading
         title.textContent = "Sorry, no drinks matched your search"
         section.innerHTML = null;
@@ -55,7 +67,18 @@ function displayDrinks(cocktail){
    section.innerHTML = newDrinks; 
    return section;
 }
-console.log(displayDrinks());
+
+/*const form = document.querySelector(".search-form");
+const input = document.querySelector("#search[name ='drink']")
+
+form.addEventListener("keyup", function (e) {
+    e.preventDefault();
+    const value = input.value;
+    if(!value) return;
+    showDrinks()
+    console.log(input.value);
+});*/
+//console.log(displayDrinks());
 
 /*const fetchDrinks = async(url) =>{
 
