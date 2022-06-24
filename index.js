@@ -149,18 +149,68 @@ function presentDrink (){
     if(!id){
         document.location.replace("#all-cocktails")
     }
-    else{
-        const drink = fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    else{ 
+    const id = localStorage.getItem("drink")
+
+    /*const img = document.querySelector(".drink-img");
+    const drinkName = document.querySelector(".drink-name");
+    const description = document.querySelector(".drink-desc");
+    const ingredients = document.querySelector(".drink-ingredients");*/
+    
+        const drink = fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify({})
+
+    })
     .then(response => response.json())
-    .then(drink => {
+    .then(data => {
       // console.log(data)
-    displayDrink(drink)
+    displayDrink(data)
 })
+ console.log(drink)
     }
-} 
-function displayDrink(drink){
-    console.log(drink);
+    //displayDrink()
 }
+    
+//presentDrink()
+
+function displayDrink(data){
+    presentDrink()
+    const drink = data.drinks[0];
+    const {strDrinkThumb: image, strDrink: name, strInstructions: desc} = drink;
+    const list = [
+        drink.strIngredient1,
+        drink.strIngredient2,
+        drink.strIngredient3,
+        drink.strIngredient4,
+        drink.strIngredient5,
+    ];
+    const img = document.querySelector(".drink-img");
+    const drinkName = document.querySelector(".drink-name");
+    const description = document.querySelector(".drink-desc");
+    const ingredients = document.querySelector(".drink-ingredients");
+    img.src = image;
+    drinkName.textContent = name;
+    description.textContent = desc;
+    ingredients.innerHTML = list.map((item) =>{
+        if(!item) return;
+        return `<li><i class="far fa-check-square"></i>${item}</li>`;
+    })
+    .join("");
+    presentDrink(drink)
+    console.log(drink, list);
+}
+displayDrink();
+function showOneDrink(url, data = {}) {
+    presentDrink()
+    displayDrink()
+}
+
+
 //console.log(displayDrinks());
 
 /*const fetchDrinks = async(url) =>{
