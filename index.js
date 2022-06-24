@@ -105,7 +105,45 @@ form.addEventListener("keyup", function (e) {
 
 });
 
+// section individual drinks
+const section = document.querySelector(".section-center");
+//const title = document.getElementsByClassName(".title");
 
+function setDrink() {
+   // const section = document.getElementsByClassName(".section-center");
+    //displayDrinks()
+   // function presentDrinks() {
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${id}`)
+        .then(response => response.json())
+        .then(data => {
+            displayDrinks(data)
+        })    
+    }
+        //const section= document.getElementsByClassName(".section-center");      
+section.addEventListener("click", function(e) {
+   // e.preventDefault()
+    const id = e.target.parentElement.dataset.id;
+    localStorage.setItem("drink",id)
+        /*function presentDrinks() {
+            fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`)
+            .then(response => response.json())
+            .then(data => {
+                displayDrinks(data)
+            }) */     
+            console.log(id)  
+    })
+   // presentDrinks()
+    //const id = e.target.parentElement.dataset.id;
+    
+
+
+//setDrink()
+function viewDrinks(){
+    const section = displayDrinks(data);
+    if(section) {
+        setDrink(section);
+    }
+}
 //console.log(displayDrinks());
 
 /*const fetchDrinks = async(url) =>{

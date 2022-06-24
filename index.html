@@ -17,7 +17,7 @@
             <h2>Make cocktails, Anytime Anywhere!</h2>
             <input id = "search" type="text" placeholder="Search your favourite cocktail" name="drink"/>
         </form>
-        <section class="section cocktails">
+        <section class="section cocktails" id="all-cocktails">
             <article class="loading hide-loading">
                 <img src="./loading.jpeg" alt="loading"/>
             </article>
@@ -48,6 +48,15 @@
                 </a>
                 <!-- end of single drink-->
             </div>
+        </section>
+        <section class="single-drink" id="drinks_content">
+            <img src="./martini.jpeg" class="drink-img" alt="" />
+            <article class="drink-info">
+                <h3 class="drink-name"></h3>
+                <p class="drink-desc"></p>
+                <ul class="drink-ingredients"></ul>
+                <a href="#all-cocktails" class="btn">all cocktails</a>
+            </article>
         </section>
         <script type="text/javascript" src="./index.js"></script>
     </body>
