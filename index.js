@@ -144,6 +144,23 @@ function viewDrinks(){
         setDrink(section);
     }
 }
+function presentDrink (){
+    const id = localStorage.getItem("drink");
+    if(!id){
+        document.location.replace("#all-cocktails")
+    }
+    else{
+        const drink = fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    .then(response => response.json())
+    .then(drink => {
+      // console.log(data)
+    displayDrink(drink)
+})
+    }
+} 
+function displayDrink(drink){
+    console.log(drink);
+}
 //console.log(displayDrinks());
 
 /*const fetchDrinks = async(url) =>{
