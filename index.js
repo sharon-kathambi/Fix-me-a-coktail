@@ -1,28 +1,36 @@
-const URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s";
+//const URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s";
 
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
    showDrinks("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a") 
 })
 
-async function showDrinks(url, data = {}) {
+/*async function showDrinks(url, data = {}) {
     const data2 = await fetchDrinks(url);
     console.log(data2)
     //fetch drinks
     //display drinks
    const section2 = await displayDrinks(data);
     console.log(section2)
-    };
+    };*/
 
-const form = document.querySelector(".search-form");
+/*const form = document.querySelector(".search-form");
 const input = document.querySelector("#search[name ='drink']")
     
 form.addEventListener("keyup", function (e) {
      e.preventDefault();
      const value = input.value;
      if(!value) return;
-     showDrinks(`${URL}${value}`);
+     /*function presentDrinks() {
+        fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
+        .then(response => response.json())
+        .then(data => {
+            displayDrinks(data)
+        })  
+     }
+     presentDrinks();
+    showDrinks(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${value}`);
     console.log(input.value);
-    });
+    });*/
 
 function fetchDrinks() {
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a")
@@ -67,17 +75,37 @@ function displayDrinks({drinks}){
    section.innerHTML = newDrinks; 
    return section;
 }
+function showDrinks(url, data = {}) {
+    fetchDrinks(url);
+    //console.log(data2)
+    //fetch drinks
+    //display drinks
+   displayDrinks(data);
+   // console.log(section2)
+    };
 
-/*const form = document.querySelector(".search-form");
+
+const form = document.querySelector(".search-form");
 const input = document.querySelector("#search[name ='drink']")
 
 form.addEventListener("keyup", function (e) {
     e.preventDefault();
     const value = input.value;
     if(!value) return;
-    showDrinks()
-    console.log(input.value);
-});*/
+    //showDrinks(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${value}`)
+    //console.log(input.value);
+    function presentDrinks() {
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${value}`)
+        .then(response => response.json())
+        .then(data => {
+            displayDrinks(data)
+        })  
+     }
+     presentDrinks();
+
+});
+
+
 //console.log(displayDrinks());
 
 /*const fetchDrinks = async(url) =>{
