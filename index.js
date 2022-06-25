@@ -124,14 +124,14 @@ section.addEventListener("click", function(e) {
    // e.preventDefault()
     const id = e.target.parentElement.dataset.id;
     localStorage.setItem("drink",id)
+    presentDrink()
         /*function presentDrinks() {
             fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`)
             .then(response => response.json())
             .then(data => {
                 displayDrinks(data)
-            }) */     
-            console.log(id)  
-    })
+            }) */  
+        })
    // presentDrinks()
     //const id = e.target.parentElement.dataset.id;
     
@@ -150,6 +150,8 @@ function presentDrink (){
         document.location.replace("#all-cocktails")
     }
     else{ 
+    
+
     const id = localStorage.getItem("drink")
 
     /*const img = document.querySelector(".drink-img");
@@ -157,15 +159,7 @@ function presentDrink (){
     const description = document.querySelector(".drink-desc");
     const ingredients = document.querySelector(".drink-ingredients");*/
     
-        const drink = fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,{
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        },
-        body: JSON.stringify({})
-
-    })
+       const drink = fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then(response => response.json())
     .then(data => {
       // console.log(data)
@@ -180,6 +174,13 @@ function presentDrink (){
 
 function displayDrink(data){
     presentDrink()
+    /*const id = localStorage.getItem("drink")
+    const drink = fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data)
+    displayDrink(data)
+})*/
     const drink = data.drinks[0];
     const {strDrinkThumb: image, strDrink: name, strInstructions: desc} = drink;
     const list = [
@@ -198,7 +199,7 @@ function displayDrink(data){
     description.textContent = desc;
     ingredients.innerHTML = list.map((item) =>{
         if(!item) return;
-        return `<li><i class="far fa-check-square"></i>${item}</li>`;
+        return `<li>${item}</li>`;
     })
     .join("");
     presentDrink(drink)
