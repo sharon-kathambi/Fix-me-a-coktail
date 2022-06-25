@@ -1,36 +1,6 @@
-//const URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s";
-
 document.addEventListener("DOMContentLoaded", () => {
    showDrinks("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a") 
 })
-
-/*async function showDrinks(url, data = {}) {
-    const data2 = await fetchDrinks(url);
-    console.log(data2)
-    //fetch drinks
-    //display drinks
-   const section2 = await displayDrinks(data);
-    console.log(section2)
-    };*/
-
-/*const form = document.querySelector(".search-form");
-const input = document.querySelector("#search[name ='drink']")
-    
-form.addEventListener("keyup", function (e) {
-     e.preventDefault();
-     const value = input.value;
-     if(!value) return;
-     /*function presentDrinks() {
-        fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
-        .then(response => response.json())
-        .then(data => {
-            displayDrinks(data)
-        })  
-     }
-     presentDrinks();
-    showDrinks(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${value}`);
-    console.log(input.value);
-    });*/
 
 function fetchDrinks() {
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a")
@@ -41,13 +11,7 @@ function fetchDrinks() {
 })
     .catch(error => console.log("Fetch error:", error))
 }
-//const display = fetchDrinks();
 
-//const section = document.getElementsByClassName(".section-center");
-//const title = document.getElementsByClassName(".title");
-
-
-//const {idDrink:id,strDrink:name,strDrinkThumb:image} = drink
 function displayDrinks({drinks}){
     const section = document.querySelector(".section-center");
     const title = document.querySelector(".title");
@@ -76,12 +40,11 @@ function displayDrinks({drinks}){
    return section;
 }
 function showDrinks(url, data = {}) {
-    fetchDrinks(url);
-    //console.log(data2)
     //fetch drinks
+    fetchDrinks(url);
+    
     //display drinks
    displayDrinks(data);
-   // console.log(section2)
     };
 
 
@@ -92,7 +55,6 @@ form.addEventListener("keyup", function (e) {
     e.preventDefault();
     const value = input.value;
     if(!value) return;
-    //showDrinks(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${value}`)
     //console.log(input.value);
     function presentDrinks() {
         fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${value}`)
@@ -107,12 +69,8 @@ form.addEventListener("keyup", function (e) {
 
 // section individual drinks
 const section = document.querySelector(".section-center");
-//const title = document.getElementsByClassName(".title");
 
 function setDrink() {
-   // const section = document.getElementsByClassName(".section-center");
-    //displayDrinks()
-   // function presentDrinks() {
         fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${id}`)
         .then(response => response.json())
         .then(data => {
@@ -124,16 +82,8 @@ section.addEventListener("click", function(e) {
    // e.preventDefault()
     const id = e.target.parentElement.dataset.id;
     localStorage.setItem("drink",id)
-    presentDrink()
-        /*function presentDrinks() {
-            fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`)
-            .then(response => response.json())
-            .then(data => {
-                displayDrinks(data)
-            }) */  
-        })
-   // presentDrinks()
-    //const id = e.target.parentElement.dataset.id;
+    presentDrink()        
+    })
     
 
 
@@ -150,37 +100,19 @@ function presentDrink (){
         document.location.replace("#all-cocktails")
     }
     else{ 
-    
-
     const id = localStorage.getItem("drink")
-
-    /*const img = document.querySelector(".drink-img");
-    const drinkName = document.querySelector(".drink-name");
-    const description = document.querySelector(".drink-desc");
-    const ingredients = document.querySelector(".drink-ingredients");*/
-    
-       const drink = fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    const drink = fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then(response => response.json())
     .then(data => {
       // console.log(data)
     displayDrink(data)
-})
- console.log(drink)
-    }
-    //displayDrink()
+    })
+ //console.log(drink)
+ }
+   
 }
-    
-//presentDrink()
 
 function displayDrink(data){
-    presentDrink()
-    /*const id = localStorage.getItem("drink")
-    const drink = fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data)
-    displayDrink(data)
-})*/
     const drink = data.drinks[0];
     const {strDrinkThumb: image, strDrink: name, strInstructions: desc} = drink;
     const list = [
@@ -203,35 +135,11 @@ function displayDrink(data){
     })
     .join("");
     presentDrink(drink)
-    console.log(drink, list);
+    //console.log(drink, list);
 }
-displayDrink();
-function showOneDrink(url, data = {}) {
+//displayDrink();
+function showOneDrink() {
     presentDrink()
     displayDrink()
 }
-
-
-//console.log(displayDrinks());
-
-/*const fetchDrinks = async(url) =>{
-
-try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-
-}catch(error) {
-    console.log(data);
-    }
-}
-
-
-const showDrinks = async(url) =>{
-    const data = await fetchDrinks(url)
-    //fetch drinks
-    //display drinks
-    console.log(data)
-    }
-
-showDrinks();*/
+showOneDrink()
