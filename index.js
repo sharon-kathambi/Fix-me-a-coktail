@@ -6,7 +6,6 @@ function fetchDrinks() {
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a")
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
     displayDrinks(data)
 })
     .catch(error => console.log("Fetch error:", error))
@@ -15,17 +14,14 @@ function fetchDrinks() {
 function displayDrinks({drinks}){
     const section = document.querySelector(".section-center");
     const title = document.querySelector(".title");
-    //return "Hello world";
     console.log(drinks)
 
     if(!drinks){
-        //hide loading
         title.textContent = "Sorry, no drinks matched your search"
         section.innerHTML = null;
         return;
     }
     const newDrinks = drinks.map((drink) =>{
-        //console.log(drink)
         const {idDrink:id,strDrink:name,strDrinkThumb:image} = drink
         return `<a href="#drinks_content">
         <article class="cocktail" data-id="${id}">
@@ -55,7 +51,6 @@ form.addEventListener("keyup", function (e) {
     e.preventDefault();
     const value = input.value;
     if(!value) return;
-    //console.log(input.value);
     function presentDrinks() {
         fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${value}`)
         .then(response => response.json())
@@ -77,7 +72,7 @@ function setDrink() {
             displayDrinks(data)
         })    
     }
-        //const section= document.getElementsByClassName(".section-center");      
+             
 section.addEventListener("click", function(e) {
    // e.preventDefault()
     const id = e.target.parentElement.dataset.id;
@@ -86,8 +81,6 @@ section.addEventListener("click", function(e) {
     })
     
 
-
-//setDrink()
 function viewDrinks(){
     const section = displayDrinks(data);
     if(section) {
@@ -104,10 +97,8 @@ function presentDrink (){
     const drink = fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
     displayDrink(data)
     })
- //console.log(drink)
  }
    
 }
@@ -135,9 +126,8 @@ function displayDrink(data){
     })
     .join("");
     presentDrink(drink)
-    //console.log(drink, list);
 }
-//displayDrink();
+
 function showOneDrink() {
     presentDrink()
     displayDrink()
